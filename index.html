@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Student</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background: url('img/bg home.jpg');
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 50px 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .header p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>A World of Opportunities for Students</h1>
+        <p>"Your Gateway to Learning and Growth"</p>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <img src="img/logo.jpg" alt="E-Student" width="40px">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="list of profile.html">List of Profiles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                </ul>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle" />
+                    <label class="form-check-label" id="themeLabel">Dark Mode</label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-body-tertiary" id="floatingSemesters" placeholder="Semesters">
+                    <label for="floatingSemesters">Semesters</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <select class="form-select bg-body-tertiary" id="floatingSelect">
+                        <option selected>Select Faculty</option>
+                        <option value="1">Fakulti Perakaunan</option>
+                        <option value="2">Fakulti Pengajian Pengkomputeran</option>
+                        <option value="3">Fakulti Pengajian Alam Bina</option>
+                    </select>
+                    <label for="floatingSelect">Faculty</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-body-tertiary" id="floatingProject" placeholder="Project">
+                    <label for="floatingProject">Project</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-body-tertiary" id="floatingSearch" placeholder="Search">
+                    <label for="floatingSearch">Search</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-body-tertiary">
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-md-2 text-center">
+                    <img src="img/uitm.png" alt="UITM" width="200px"/>
+                </div>
+                <div class="col-md-10">
+                    <h3>E Student</h3>
+                    <h6>Universiti Teknologi MARA</h6>
+                    <p>The E-Profile is a cutting-edge digital platform created by Universiti Teknologi MARA (UiTM) to highlight the academic, professional, and personal accomplishments of its students. This platform is designed to support students throughout their educational journey, offering a detailed and dynamic profile to showcase their skills, projects, research contributions, and future aspirations.</p>
+
+                    <span class="badge text bg-warning py-2 px-2"><i class="fa-regular fa-circle-check"></i>10,550 Research</span>
+                    <span class="badge text bg-success py-2 px-2"><i class="fa-regular fa-star"></i>10,355 Completed</span>
+                    <span class="badge text bg-danger py-2 px-2"><i class="fa-solid fa-triangle-exclamation"></i>100 Not Completed</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="container my-3">
+        <div class="row">
+            <!-- First Chart -->
+            <div class="col-md-6">
+                <div class="card shadow bg-body-tertiary border-0">
+                    <div class="card-body">
+                        <canvas id="Chart1"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Chart -->
+            <div class="col-md-6">
+                <div class="card shadow bg-body-tertiary border-0">
+                    <div class="card-body">
+                        <canvas id="Chart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Implementation -->
+    <script>
+        // First Chart
+        const ctx1 = document.getElementById('Chart1').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'March', 'April', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Student Data Overview',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                    backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Second Chart
+        const ctx2 = document.getElementById('Chart2').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Students Activities',
+                    data: [3, 7, 4, 9, 6, 8],
+                    borderColor: 'blue',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">What Our Students Say</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #f8d7da;">
+                <div class="card-body text-center">
+                    <blockquote>"This platform has transformed how I present my projects!"</blockquote>
+                    <p>- Aiman, CS Student</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #d1e7dd;">
+                <div class="card-body text-center">
+                    <blockquote>"A great way to connect with peers and showcase skills."</blockquote>
+                    <p>- Sarah, Engineering Student</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #cff4fc;">
+                <div class="card-body text-center">
+                    <blockquote>"E-Student helped me land my internship!"</blockquote>
+                    <p>- Kamal, Business Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Key Features</h2>
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #fff3cd;">
+                <div class="card-body">
+                    <i class="fa fa-laptop-code fa-3x"></i>
+                    <h4>Digital Profiles</h4>
+                    <p>Showcase your skills and projects effortlessly.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #f8d7da;">
+                <div class="card-body">
+                    <i class="fa fa-network-wired fa-3x"></i>
+                    <h4>Networking</h4>
+                    <p>Connect with professionals and peers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #d1e7dd;">
+                <div class="card-body">
+                    <i class="fa fa-chart-line fa-3x"></i>
+                    <h4>Progress Tracking</h4>
+                    <p>Visualize your academic growth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Upcoming Events</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #cff4fc;">
+                <div class="card-body text-center">
+                    <h5>📅 Webinar on Project Management</h5>
+                    <p>15th Jan</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #fff3cd;">
+                <div class="card-body text-center">
+                    <h5>📅 Career Fair</h5>
+                    <p>22nd Jan</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0" style="background-color: #f8d7da;">
+                <div class="card-body text-center">
+                    <h5>📅 Coding Workshop</h5>
+                    <p>28th Jan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-4">
+        <p>&copy; 2025 E-Student. All Rights Reserved.</p>
+        <p>Email: support@estudent.com | Phone: +60134801298</p>
+        <a href="https://www.facebook.com" class="text-light"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com" class="text-light"><i class="fa-brands fa-instagram"></i></a>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dark Mode Script -->
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute("data-bs-theme", theme);
+            localStorage.setItem("theme", theme);
+            document.getElementById("themeLabel").innerText = theme === "dark" ? "Dark Mode On" : "Dark Mode Off";
+        }
+
+        document.getElementById("darkModeToggle").addEventListener("change", function (event) {
+            setTheme(event.target.checked ? "dark" : "");
+        });
+
+        window.onload = function () {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                setTheme(savedTheme);
+                document.getElementById("darkModeToggle").checked = savedTheme === "dark";
+            }
+        };
+    </script>
+</body>
+</html>
